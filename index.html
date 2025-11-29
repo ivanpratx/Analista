@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel dinámico de diseño de herramienta financiera</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #0f172a;
+      --card: #1e293b;
+      --accent: #38bdf8;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+    }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      margin: 0;
+      background: radial-gradient(circle at 20% 20%, rgba(56,189,248,0.1), transparent 30%),
+                  radial-gradient(circle at 80% 0%, rgba(129,140,248,0.12), transparent 30%),
+                  var(--bg);
+      color: var(--text);
+    }
+    header {
+      padding: 32px;
+      text-align: center;
+      border-bottom: 1px solid rgba(226,232,240,0.08);
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+      letter-spacing: -0.02em;
+    }
+    p.subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+    main {
+      max-width: 1100px;
+      margin: 24px auto 48px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: linear-gradient(145deg, rgba(30,41,59,0.9), rgba(30,41,59,0.7));
+      border: 1px solid rgba(226,232,240,0.1);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(56,189,248,0.6);
+    }
+    details {
+      border: 1px solid rgba(226,232,240,0.08);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: rgba(15,23,42,0.4);
+    }
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+    summary::-webkit-details-marker {
+      display: none;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(56,189,248,0.14);
+      color: var(--accent);
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    ul {
+      padding-left: 16px;
+      margin: 8px 0;
+      color: var(--muted);
+    }
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      padding: 24px 16px 32px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Blueprint de la herramienta de análisis financiero</h1>
+    <p class="subtitle">Explora cada capa: ingesta, KPIs, LLM, datos externos, backend, dashboard y seguridad.</p>
+  </header>
+  <main>
+    <section class="card">
+      <div class="pill">1) Ingesta y parsing</div>
+      <details open>
+        <summary>Pipeline de ingesta y parsing de documentos</summary>
+        <ul>
+          <li>Extracción de PDFs/Excels con fallback OCR para escaneados.</li>
+          <li>Mapeo de secciones (MD&A, ingresos, balance, cash-flow, notas) con heurísticas y embeddings.</li>
+          <li>Normalización de unidades (USD/EUR), fechas y porcentajes; validaciones contables básicas.</li>
+          <li>Metadatos guardados: empresa, período, fuente, confianza OCR.</li>
+        </ul>
+      </details>
+    </section>
+    <section class="card">
+      <div class="pill">2) KPIs y scoring</div>
+      <details open>
+        <summary>Módulo de KPIs, anomalías y scoring</summary>
+        <ul>
+          <li>Catálogo de KPIs por sector; cálculo sobre dataset normalizado.</li>
+          <li>Detección de outliers y tendencias QoQ/YoY con thresholds y z-scores.</li>
+          <li>Modelo de scoring configurable: crecimiento, rentabilidad, balance y calidad de earnings.</li>
+          <li>Explicabilidad: KPIs y señales que generan el score.</li>
+        </ul>
+      </details>
+    </section>
+    <section class="card">
+      <div class="pill">3) Capa LLM</div>
+      <details open>
+        <summary>Prompts/flows LLM para resúmenes y eventos</summary>
+        <ul>
+          <li>Prompts con citaciones al texto fuente (chunking + retrieval) para evitar alucinaciones.</li>
+          <li>Extracción estructurada (JSON) de riesgos, catalizadores y tono del management.</li>
+          <li>Fact-checking cruzando con KPIs calculados.</li>
+        </ul>
+      </details>
+    </section>
+    <section class="card">
+      <div class="pill">4) Datos externos</div>
+      <details open>
+        <summary>Integración de fuentes externas</summary>
+        <ul>
+          <li>Conectores de noticias/finanzas para ratings, estimaciones y calendario de eventos.</li>
+          <li>LLM de navegación/QA para resumir noticias con referencias a URLs y fechas.</li>
+          <li>Normalización y almacenamiento de titulares/eventos con puntaje de relevancia y sentimiento.</li>
+        </ul>
+      </details>
+    </section>
+    <section class="card">
+      <div class="pill">5) Backend</div>
+      <details open>
+        <summary>Infra backend y data layer</summary>
+        <ul>
+          <li>Esquema de base de datos: documentos, KPIs, eventos externos, logs.</li>
+          <li>Jobs de ingesta y reprocesado con colas; idempotencia por empresa y período.</li>
+          <li>Audit logs y versionado de prompts/modelos.</li>
+        </ul>
+      </details>
+    </section>
+    <section class="card">
+      <div class="pill">6) Frontend</div>
+      <details open>
+        <summary>Dashboard y UX de insights</summary>
+        <ul>
+          <li>Cards para score, KPIs, alertas, catalizadores y timeline de eventos/noticias.</li>
+          <li>Enlaces a párrafos/tablas origen (citaciones) y descarga de reporte.</li>
+          <li>Filtros por período, divisa y sector con estados de carga/errores.</li>
+        </ul>
+      </details>
+    </section>
+    <section class="card">
+      <div class="pill">7) Seguridad</div>
+      <details open>
+        <summary>Seguridad y compliance</summary>
+        <ul>
+          <li>Autenticación/autorización y cifrado en tránsito/repouso.</li>
+          <li>Validaciones numéricas y reglas anti-alucinación con respuestas citadas.</li>
+          <li>Monitoreo de costos y límites de APIs externas.</li>
+        </ul>
+      </details>
+    </section>
+    <section class="card">
+      <div class="pill">8) Evaluación</div>
+      <details open>
+        <summary>Plan de evaluación continua</summary>
+        <ul>
+          <li>Dataset de referencia con reportes anotados y noticias vinculadas.</li>
+          <li>Métricas: precisión KPIs, recall de eventos, tasa de alucinaciones, latencia.</li>
+          <li>Pruebas de regresión para pipelines y plantillas de prompts.</li>
+        </ul>
+      </details>
+    </section>
+  </main>
+  <div class="footer">Tip: sirve index.html con <code>python -m http.server 8000</code> y abre http://localhost:8000 para navegar.</div>
+</body>
+</html>
